@@ -72,6 +72,7 @@ namespace Library_System
         public string ReturnBook(string title)
         {
             for (int i = 0; i < books.Count; i++)
+            {
                 if (books[i].Titel.ToUpper().Contains(title.ToUpper()))
                 {
                     if (!books[i].Availability)
@@ -85,6 +86,7 @@ namespace Library_System
                         return $"[ {books[i].Titel} - {books[i].Author} - {books[i].Iben} ]\nbook still avalibale and not borrowed";
                     }
                 }
+            }
             return $"This book not in the library you can add it"; 
         }
 
@@ -138,6 +140,7 @@ namespace Library_System
                 Console.WriteLine("B - Borrow Book");
                 Console.WriteLine("R - Return Book");
                 Console.WriteLine("Q - Quit");
+                Console.Write("Chose Char: ");
                 chose = char.ToUpper(char.Parse(Console.ReadLine()));
                 switch (chose)
                 {
@@ -145,9 +148,11 @@ namespace Library_System
                         library.PrintList();
                         break;
                     case 'A': // Adding books to the library
-                        Console.WriteLine("pleas enter Book title and author and iben ");
+                        Console.Write("Book title: ");
                         string titel = Console.ReadLine().ToLower();
+                        Console.Write("author: ");
                         string author = Console.ReadLine().ToLower();
+                        Console.Write("iben: ");                        
                         double iben = double.Parse(Console.ReadLine().ToLower());
                         string addBook = library.AddBook(new Book(titel, author, iben));
                         Console.WriteLine(addBook);
